@@ -2,7 +2,7 @@
 @Author: BoYanZh
 @Date: 2020-05-12 11:29:02
 LastEditors: BoYanZh
-LastEditTime: 2020-10-23 12:31:44
+LastEditTime: 2020-10-23 12:44:43
 '''
 # -*- coding: utf-8 -*-
 from flask import Flask, Response, request, send_from_directory, jsonify, escape, redirect, session, abort
@@ -230,10 +230,9 @@ def getProblemRunning(problemName):
 @app.route('/problems/<problemName>/result')
 @auth
 def getProblemResult(problemName):
-    return send_from_directory(
-        root,
-        filename=f"./problems/{problemName}/re.html",
-        mimetype='text/plain; charset=utf-8')
+    return send_from_directory(root,
+                               filename=f"./problems/{problemName}/re.html",
+                               mimetype='text/plain; charset=utf-8')
 
 
 @app.route('/problems/<problemName>/status')
@@ -268,6 +267,7 @@ def getProblems():
         ]
         l.sort(key=alphanum)
         return l
+
     if not os.path.exists("./problems"):
         os.mkdir("./problems")
     dirs = next(os.walk("./problems"))[1]
@@ -696,7 +696,6 @@ def add_header(response):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('-p',)
+    parser.add_argument('-p', default=2121)
     args = parser.parse_args()
-    val = args.a
-    app.run(host='0.0.0.0', port=2121, threaded=True)
+    app.run(host='0.0.0.0', port=args.p, threaded=True)
