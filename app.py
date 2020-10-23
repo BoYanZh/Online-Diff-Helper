@@ -2,7 +2,7 @@
 @Author: BoYanZh
 @Date: 2020-05-12 11:29:02
 LastEditors: BoYanZh
-LastEditTime: 2020-08-08 21:34:38
+LastEditTime: 2020-10-23 12:31:44
 '''
 # -*- coding: utf-8 -*-
 from flask import Flask, Response, request, send_from_directory, jsonify, escape, redirect, session, abort
@@ -419,8 +419,8 @@ def runProblem(problemName, testSize, withVal):
         shutil.rmtree(f"{solverDir}data")
     os.mkdir(f"{solverDir}data")
     lastCaseStatus = ''
-    for fn in generatorFileNames:
-        for i in range(testSize // len(generatorFileNames) + 1):
+    for i in range(testSize):
+        for fn in generatorFileNames:
             argFilePath = f"{generatorDir}data/{fn}.{i}.arg"
             stdinFilePath = f"{generatorDir}data/{fn}.{i}.in"
             generatorFilePath = f"{generatorDir}{fn}.exe"
